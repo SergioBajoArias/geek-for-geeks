@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SecondLargestTest {
 
-    private SecondLargest secondLargest = new SecondLargest();
+    private final SecondLargest secondLargest = new SecondLargest();
 
     @Test
     void getSecondLargest() {
