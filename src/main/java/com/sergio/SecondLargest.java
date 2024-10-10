@@ -5,22 +5,24 @@ package com.sergio;
  */
 public class SecondLargest {
 
-    public int getSecondLargest(int[] arr) {
-        if(arr.length == 0){
-            return -1;
+    private static final int NOT_FOUND = -1;
+
+    public int getSecondLargest(int[] numbers) {
+        if(numbers.length == 0){
+            return NOT_FOUND;
         }
-        int largest = arr[0];
-        int secondLargest = arr[0];
-        for (int i = 0; i < arr.length; i++){
-            if(arr[i] > largest){
+        int largest = numbers[0];
+        int secondLargest = numbers[0];
+        for (int number : numbers){
+            if(number > largest){
                 secondLargest = largest;
-                largest = arr[i];
-            } else if(arr[i] < largest && (arr[i] > secondLargest || secondLargest == largest)){
-                secondLargest = arr[i];
+                largest = number;
+            } else if(number < largest && (number > secondLargest || secondLargest == largest)){
+                secondLargest =number;
             }
         }
         if(secondLargest == largest){
-            return -1;
+            return NOT_FOUND;
         } else {
             return secondLargest;
         }
