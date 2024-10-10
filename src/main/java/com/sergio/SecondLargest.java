@@ -1,5 +1,8 @@
 package com.sergio;
 
+/**
+ * <a href="https://www.geeksforgeeks.org/problems/second-largest3735/1">Link to problem</a>
+ */
 public class SecondLargest {
 
     public int getSecondLargest(int[] arr) {
