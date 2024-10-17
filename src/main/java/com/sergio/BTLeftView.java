@@ -1,11 +1,13 @@
 package com.sergio;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <a href="https://www.geeksforgeeks.org/problems/check-for-bst/1">Link to problem</a>
  */
-public class BSTChecker {
+public class BTLeftView {
     Node buildTree(String str) {
 
         if (str.isEmpty() || str.charAt(0) == 'N') {
@@ -62,33 +64,29 @@ public class BSTChecker {
         return root;
     }
 
-    boolean isBST(Node root) {
-        if(root == null) {
-            return true;
-        } else {
-            return allChildrenAreBiggerThanValue(root.data, root.right) && allChildrenAreSmallerThanValue(root.data, root.left) && isBST(root.left) && isBST(root.right);
+    ArrayList<Integer> leftView(Node root) {
+        ArrayList<Integer> leftView = new ArrayList<>();
+        List<Node> nodesInLevel = new ArrayList<>();
+        nodesInLevel.add(root);
+        while(!nodesInLevel.isEmpty()) {
+            leftView.add(Integer.valueOf(nodesInLevel.get(0).data));
+            nodesInLevel = getChildrenFromNodes(nodesInLevel);
         }
+
+        return leftView;
     }
 
-    boolean allChildrenAreBiggerThanValue(Integer value, Node child) {
-        if(child == null) {
-            return true;
-        } else if(child.data <= value) {
-            return false;
-        } else {
-            return allChildrenAreBiggerThanValue(value, child.left) && allChildrenAreBiggerThanValue(value, child.right);
+    List<Node> getChildrenFromNodes(List<Node> nodes) {
+        List<Node> children = new ArrayList<>();
+        for(Node node : nodes) {
+            if(node.left != null) {
+                children.add(node.left);
+            }
+            if(node.right != null) {
+                children.add(node.right);
+            }
         }
+        return children;
     }
 
-    boolean allChildrenAreSmallerThanValue(Integer value, Node child) {
-        if(child == null) {
-            return true;
-        } else if(child.data >= value) {
-            return false;
-        } else {
-            return allChildrenAreSmallerThanValue(value, child.left) && allChildrenAreSmallerThanValue(value, child.right);
-        }
-    }
 }
-
-
