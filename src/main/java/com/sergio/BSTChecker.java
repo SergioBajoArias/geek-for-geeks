@@ -66,28 +66,28 @@ public class BSTChecker {
         if(root == null) {
             return true;
         } else {
-            return isBiggerThanChildren(root.data, getAllChildren(root.left)) && isSmallerThanChildren(root.data, getAllChildren(root.right)) && isBST(root.left) && isBST(root.right);
+            return allChildrenAreBiggerThanValue(root.data, root.right) && allChildrenAreSmallerThanValue(root.data, root.left) && isBST(root.left) && isBST(root.right);
         }
     }
 
-    boolean isSmallerThanChildren(Integer root, List<Integer> children) {
-        return children.stream().noneMatch(child -> root >= child);
-    }
-
-    boolean isBiggerThanChildren(Integer root, List<Integer> children) {
-        return children.stream().noneMatch(child -> root <= child);
-    }
-
-    List<Integer> getAllChildren(Node root) {
-        List<Integer> results = new ArrayList<>();
-        if(root == null) {
-            return results;
+    boolean allChildrenAreBiggerThanValue(Integer value, Node child) {
+        if(child == null) {
+            return true;
+        } else if(child.data <= value) {
+            return false;
         } else {
-            results.add(root.data);
-            results.addAll(getAllChildren(root.left));
-            results.addAll(getAllChildren(root.right));
+            return allChildrenAreBiggerThanValue(value, child.left) && allChildrenAreBiggerThanValue(value, child.right);
         }
-        return results;
+    }
+
+    boolean allChildrenAreSmallerThanValue(Integer value, Node child) {
+        if(child == null) {
+            return true;
+        } else if(child.data >= value) {
+            return false;
+        } else {
+            return allChildrenAreSmallerThanValue(value, child.left) && allChildrenAreSmallerThanValue(value, child.right);
+        }
     }
 }
 
