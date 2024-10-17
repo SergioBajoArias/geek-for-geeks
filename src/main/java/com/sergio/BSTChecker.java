@@ -1,8 +1,6 @@
 package com.sergio;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * <a href="https://www.geeksforgeeks.org/problems/check-for-bst/1">Link to problem</a>
@@ -65,7 +63,31 @@ public class BSTChecker {
     }
 
     boolean isBST(Node root) {
-        return false;
+        if(root == null) {
+            return true;
+        } else {
+            return isBiggerThanChildren(root.data, getAllChildren(root.left)) && isSmallerThanChildren(root.data, getAllChildren(root.right)) && isBST(root.left) && isBST(root.right);
+        }
+    }
+
+    boolean isSmallerThanChildren(Integer root, List<Integer> children) {
+        return children.stream().noneMatch(child -> root >= child);
+    }
+
+    boolean isBiggerThanChildren(Integer root, List<Integer> children) {
+        return children.stream().noneMatch(child -> root <= child);
+    }
+
+    List<Integer> getAllChildren(Node root) {
+        List<Integer> results = new ArrayList<>();
+        if(root == null) {
+            return results;
+        } else {
+            results.add(root.data);
+            results.addAll(getAllChildren(root.left));
+            results.addAll(getAllChildren(root.right));
+        }
+        return results;
     }
 }
 
