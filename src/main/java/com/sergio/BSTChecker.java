@@ -1,6 +1,7 @@
 package com.sergio;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * <a href="https://www.geeksforgeeks.org/problems/check-for-bst/1">Link to problem</a>

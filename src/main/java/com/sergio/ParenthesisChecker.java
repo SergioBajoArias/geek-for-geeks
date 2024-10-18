@@ -1,6 +1,5 @@
 package com.sergio;
 
-import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
